@@ -5,10 +5,16 @@ import fetch from "node-fetch";
 import { nanoid } from "nanoid";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 
-// Ensure environment variables exist
-if (!process.env.AWS_ACCESS_KEY_ID) throw new Error('AWS_ACCESS_KEY_ID is not set');
-if (!process.env.AWS_SECRET_ACCESS_KEY) throw new Error('AWS_SECRET_ACCESS_KEY is not set');
-if (!process.env.AWS_BUCKET_NAME) throw new Error('AWS_BUCKET_NAME is not set');
+// Ensure environment variables exist and get their typed values
+const AWS_ACCESS_KEY_ID = process.env.AWS_ACCESS_KEY_ID as string;
+const AWS_SECRET_ACCESS_KEY = process.env.AWS_SECRET_ACCESS_KEY as string;
+const AWS_BUCKET_NAME = process.env.AWS_BUCKET_NAME as string;
+const AWS_REGION = process.env.AWS_REGION || 'us-east-2';
+
+// Validate environment variables
+if (!AWS_ACCESS_KEY_ID) throw new Error('AWS_ACCESS_KEY_ID is not set');
+if (!AWS_SECRET_ACCESS_KEY) throw new Error('AWS_SECRET_ACCESS_KEY is not set');
+if (!AWS_BUCKET_NAME) throw new Error('AWS_BUCKET_NAME is not set');
 
 export const getNameAndExtensionFromUrl = (
   url: string
@@ -72,22 +78,22 @@ export const uploadFileFromLocalPath = async (
 ) => {
   try {
     const s3 = new S3Client({
-      region: process.env.AWS_REGION || 'us-east-2',
+      region: AWS_REGION,
       credentials: {
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+        accessKeyId: AWS_ACCESS_KEY_ID,
+        secretAccessKey: AWS_SECRET_ACCESS_KEY,
       },
     });
 
     const params = {
-      Bucket: process.env.AWS_BUCKET_NAME,
+      Bucket: AWS_BUCKET_NAME,
       Key: storageName,
       Body: fs.readFileSync(localPath),
     };
 
     const command = new PutObjectCommand(params);
     await s3.send(command);
-    const s3Url = `https://${process.env.AWS_BUCKET_NAME}.s3.amazonaws.com/${storageName}`;
+    const s3Url = `https://${AWS_BUCKET_NAME}.s3.amazonaws.com/${storageName}`;
     return s3Url;
   } catch (error) {
     console.error("An error occurred while uploading:", error);
