@@ -4,12 +4,11 @@ import tmp from "tmp";
 import fetch from "node-fetch";
 import { nanoid } from "nanoid";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
-import {
-  accessKeyId,
-  secretAccessKey,
-  bucket,
-  region,
-} from "@/helpers/credentials";
+
+// Ensure environment variables exist
+if (!process.env.AWS_ACCESS_KEY_ID) throw new Error('AWS_ACCESS_KEY_ID is not set');
+if (!process.env.AWS_SECRET_ACCESS_KEY) throw new Error('AWS_SECRET_ACCESS_KEY is not set');
+if (!process.env.AWS_BUCKET_NAME) throw new Error('AWS_BUCKET_NAME is not set');
 
 export const getNameAndExtensionFromUrl = (
   url: string
@@ -19,7 +18,6 @@ export const getNameAndExtensionFromUrl = (
   }
 
   const extension = path.extname(url);
-
   const basename = path.basename(url, extension);
 
   if (!basename) {
@@ -74,24 +72,25 @@ export const uploadFileFromLocalPath = async (
 ) => {
   try {
     const s3 = new S3Client({
-      region,
+      region: process.env.AWS_REGION || 'us-east-2',
       credentials: {
-        accessKeyId,
-        secretAccessKey,
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
       },
     });
 
     const params = {
-      Bucket: bucket,
+      Bucket: process.env.AWS_BUCKET_NAME,
       Key: storageName,
       Body: fs.readFileSync(localPath),
     };
 
     const command = new PutObjectCommand(params);
     await s3.send(command);
-    const s3Url = "https://kapwing-uploads.s3.amazonaws.com/" + storageName;
+    const s3Url = `https://${process.env.AWS_BUCKET_NAME}.s3.amazonaws.com/${storageName}`;
     return s3Url;
   } catch (error) {
     console.error("An error occurred while uploading:", error);
+    throw error;
   }
 };
