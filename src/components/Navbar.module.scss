@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  gap: 48px;
+  padding: 16px 32px;
+  border-bottom: 1px solid #efefef;
+}
+
+.links {
+  display: flex;
+  gap: 24px;
+}
+
+.logo {
+  display: flex;
+}
+
+.link {
+  color: #4B5563;
+  text-decoration: none;
+}
+
+.activeLink {
+  color: black;
+  font-weight: 600;
+  text-decoration: none;
+}

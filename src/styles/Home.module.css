@@ -1,0 +1,56 @@
+.main {
+  width: 100%;
+}
+
+.body {
+  width: 100%;
+  max-width: 640px;
+  margin: 0px auto;
+  margin-top: 40px;
+  color: #202020;
+}
+
+.header {
+  color: #303030;
+  font-weight: 800;
+  margin-bottom: 20px;
+  font-size: 48px;  
+  text-align: center; 
+}
+
+.p {
+  margin-bottom: 10px;
+  color: #666666;  
+  font-size: 18px;  
+  text-align: center; 
+}
+
+.p a {
+  color: #0ae7c2;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.buttons {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+  justify-content: center;
+}
+
+.button {
+  padding: 15px 30px;
+  background: #0ae7c2;
+  color: #202020;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 650;
+}
+
+.gradient {
+  background: linear-gradient(90deg, #0ae7c2, #e87bf8, #ff9066);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 1000;
+}
