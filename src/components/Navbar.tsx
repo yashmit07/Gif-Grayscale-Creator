@@ -10,14 +10,6 @@ export default function Navbar() {
 
   return (
     <div className={styles.container}>
-      <Link href="/" className={styles.logo}>
-        <Image 
-          src={kapwingLogo}
-          alt="Kapwing Logo"
-          width={100}
-          height={24}
-        />
-      </Link>
       <div className={styles.links}>
         <Link href="/" className={router.pathname == "/" ? styles.activeLink : styles.link}>
           Home
