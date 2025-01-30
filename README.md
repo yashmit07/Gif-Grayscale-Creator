@@ -2,9 +2,6 @@
 
 A modern web application for creating and customizing animated GIFs, built with Next.js and AWS S3. This full-stack project showcases seamless image processing, real-time preview capabilities, and a polished user interface.
 
-### Live Demo
-Visit the live application at [https://interview-blond-eight.vercel.app/](https://interview-blond-eight.vercel.app/)
-
 ### Features
 - Process up to 20 frames at 400x400 resolution with aspect ratio preservation
 - Drag-and-drop interface for intuitive image management
