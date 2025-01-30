@@ -1,53 +1,78 @@
-## Kapwing Interview Project by Yashmit Singh
+# GIF Studio
 
-This repo contains the code for the Kapwing interview project. The project includes both a reference Grayscale image processor and a full GIF creation tool.
-
-For more information and a guide on how to get set up, please refer to [this Google document](https://docs.google.com/document/d/1f7MpfMQevpiHisR4LlHJLUvprPdp4tepQbx29zW59E0/edit?usp=sharing).
+A modern web application for creating and customizing animated GIFs, built with Next.js and AWS S3. This full-stack project showcases seamless image processing, real-time preview capabilities, and a polished user interface.
 
 ### Live Demo
 Visit the live application at [https://interview-blond-eight.vercel.app/](https://interview-blond-eight.vercel.app/)
 
 ### Features
-- Upload multiple images (JPG/PNG up to 5MB each)
-- GIF preview with adjustable speeds
-- Three animation speed options (slow/normal/fast)
-- Drag-and-drop image reordering
-- Image gallery with deletion capability
-- Consistent output size (400x400) with aspect ratio preservation
+- Process up to 20 frames at 400x400 resolution with aspect ratio preservation
+- Drag-and-drop interface for intuitive image management
+- Real-time preview with adjustable animation speeds (slow/normal/fast)
+- Secure AWS S3 integration for reliable file storage
+- Modern, responsive UI with TypeScript for type safety
+- Multi-file upload support (JPG/PNG up to 5MB each)
+- Image reordering and frame deletion capabilities
 
-### Core Technologies
-- [Next.js](https://nextjs.org/) for the full-stack React framework
-- [Sharp](https://www.npmjs.com/package/sharp) for image processing
-- [GIF-encoder](https://www.npmjs.com/package/gif-encoder) for GIF creation
-- [AWS S3](https://aws.amazon.com/s3/) for file storage
-- [TypeScript](https://www.typescriptlang.org/) for type safety
+### Technical Stack
+- **Frontend**: Next.js, TypeScript, Tailwind CSS
+- **Image Processing**: Sharp for high-performance image manipulation
+- **GIF Creation**: GIF-encoder for optimized animation generation
+- **Storage**: AWS S3 for scalable file management
+- **Development**: TypeScript for enhanced code reliability
 
-### Key Implementation Details
-- Images are processed using Sharp to ensure consistent sizing
-- GIF creation happens server-side using GIF-encoder
-- Preview matches final output by using the same dimensions and timing
-- Error handling for failed uploads and processing
+### Architecture
+The application follows a modern full-stack architecture:
+1. **Frontend Layer**: React components with TypeScript for type safety
+2. **API Layer**: Next.js API routes for server-side processing
+3. **Processing Layer**: Sharp for image optimization and GIF-encoder for animation
+4. **Storage Layer**: AWS S3 for secure and scalable file storage
 
-### Resources & Documentation
-Key libraries used in this project:
+### Local Development
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yashmit07/Gif-Grayscale-Creator.git
+   cd Gif-Grayscale-Creator
+   ```
 
-Sharp - image processing
-- Sharp NPM Package
-- Digital Ocean Sharp Tutorial
-- Sharp API Documentation
+2. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
 
+3. Set up environment variables:
+   Create a `.env.local` file with:
+   ```
+   AWS_ACCESS_KEY_ID=your_access_key
+   AWS_SECRET_ACCESS_KEY=your_secret_key
+   AWS_BUCKET_NAME=your_bucket_name
+   AWS_REGION=your_region
+   ```
 
-GIF Encoder - creating GIF
-- GIF-encoder NPM Package
-- GIF-encoder GitHub
+4. Start the development server:
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
 
+### Technical Specifications
+- **Image Processing**:
+  - Output Resolution: 400x400 pixels
+  - Aspect Ratio: Preserved with white background
+  - Maximum Frames: 20 images
+  - File Size Limit: 5MB per image
+  - Supported Formats: JPG, PNG
 
-Next.js Resources
-- Next.js Documentation
-- Next.js API Routes
-- Deploying to Vercel
+- **Animation**:
+  - Multiple speed options
+  - Real-time preview matching final output
+  - Configurable frame intervals
+  - Infinite loop support
 
-### Testing Images Used
+### Example Output
 The GIF maker was tested with a sequence of bird animation frames:
 
 <div style="display: flex; gap: 10px;">
@@ -57,9 +82,8 @@ The GIF maker was tested with a sequence of bird animation frames:
     <img src="docs/test-images/bird4.png" width="200" alt="Bird frame 4">
 </div>
 
-### Additional Notes
-- Maximum file size: 5MB per image
-- Supported formats: JPG, PNG
-- Maximum frames: 20 images
-- Output GIF dimensions: 400x400 pixels
-- Images are fit with aspect ratio preservation
+### License
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+### Author
+Created by Yashmit Singh
